@@ -8,7 +8,7 @@ defmodule Rogger do
   @error_exchange "error"
 
   ### Public API
-  def start do
+  def start_link(opts) do
     {:ok, conn} = open_connection
     {:ok, chan} = open_channel conn
     declare_exchange chan, @info_exchange
