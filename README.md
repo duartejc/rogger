@@ -1,4 +1,4 @@
 Rogger
 ======
 
-# Elixir logger which publishes messages to RabbitMQ
+## Elixir logger which publishes messages in RabbitMQ
