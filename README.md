@@ -24,7 +24,7 @@ Add configuration related to your RabbitMQ instance:
         username: "guest",
         password: "guest"
 
-Then, run       mix deps.get to fetch and compile Rogger.
+Then, run **mix deps.get** to fetch and compile Rogger.
 
 Publish your logs :
 
