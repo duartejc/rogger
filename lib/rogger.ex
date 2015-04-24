@@ -9,7 +9,7 @@ defmodule Rogger do
 
   ### Public API
   def start_link(opts) do
-    Logger.info "Initilizing Rogger..."
+    Logger.info "Initializing Rogger..."
     {:ok, conn} = open_connection
     {:ok, chan} = open_channel conn
     declare_exchange chan, @info_exchange
