@@ -17,8 +17,14 @@ Include :rogger in your application list:
       [applications: [:rogger]]
     end
 
+Add configuration related to your RabbitMQ instance:
 
-Then, run **mix deps.get** to fetch and compile Rogger.
+    config :rogger,
+        host: "localhost",
+        username: "guest",
+        password: "guest"
+
+Then, run       mix deps.get to fetch and compile Rogger.
 
 Publish your logs :
 
