@@ -1,6 +1,7 @@
 defmodule Rogger do
   use Application
   use GenServer
+  use Timex
   require Logger
 
   @info_exchange  "info"
@@ -19,15 +20,18 @@ defmodule Rogger do
   end
 
   def info(message) do
-    GenServer.cast(:rogger, {:info, message})
+    date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
+    GenServer.cast(:rogger, {:info, ~s({"date": "#{date}", "message": "#{message}"})})
   end
 
   def warn(message) do
-    GenServer.cast(:rogger, {:warn, message})
+    date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
+    GenServer.cast(:rogger, {:warn, ~s({"date": "#{date}", "message": "#{message}"})})
   end
 
   def error(message) do
-    GenServer.cast(:rogger, {:error, message})
+    date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
+    GenServer.cast(:rogger, {:error, ~s({"date": "#{date}", "message": "#{message}"})})
   end
 
   ### Server API
