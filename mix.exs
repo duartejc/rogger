@@ -3,29 +3,34 @@ defmodule Rogger.Mixfile do
 
   def project do
     [app: :rogger,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.0",
-     deps: deps]
+     description: description,
+     package: package,
+     source_url: "https://github.com/duartejc/rogger",
+     deps: deps,
+     docs: [readme: "README.md", main: "README"]]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
   def application do
     [applications: [:logger, :amqp]]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type `mix help deps` for more examples and options
   defp deps do
     [{:amqp, "0.1.1"},
      {:timex, "~> 0.13.4"}]
+  end
+
+  defp description do
+    """
+    Elixir logger to publish log messages in RabbitMQ.
+    """
+  end
+
+  defp package do
+    [files: ["lib", "mix.exs", "README.md", "LICENSE"],
+     contributors: ["Jean Duarte"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/duartejc/rogger"}]
   end
 end
