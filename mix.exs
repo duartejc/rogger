@@ -18,7 +18,8 @@ defmodule Rogger.Mixfile do
 
   defp deps do
     [{:amqp, "0.1.1"},
-     {:timex, "~> 0.13.4"}]
+     {:timex, "~> 0.13.4"},
+     {:inch_ex, only: :docs}]
   end
 
   defp description do
