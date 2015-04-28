@@ -1,6 +1,8 @@
 Rogger
 ======
 
+[![Hex Version](http://img.shields.io/hexpm/v/rogger.svg)](https://hex.pm/packages/rogger)
+
 Simple Elixir logger which publishes messages in RabbitMQ
 
 ## Usage
@@ -8,7 +10,7 @@ Simple Elixir logger which publishes messages in RabbitMQ
 Add Rogger as a dependency in your mix.exs file.
 
     def deps do
-      [{:rogger, "~> 0.0.2"}]
+      [{:rogger, "~> 0.0.3"}]
     end
 
 Include :rogger in your application list:
