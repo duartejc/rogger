@@ -8,7 +8,7 @@ Simple Elixir logger which publishes messages in RabbitMQ
 Add Rogger as a dependency in your mix.exs file.
 
     def deps do
-      [{:rogger, "~> 0.0.2"}]
+      [{:rogger, "~> 0.0.3"}]
     end
 
 Include :rogger in your application list:
