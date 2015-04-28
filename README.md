@@ -1,6 +1,8 @@
 Rogger
 ======
 
+[![Hex Version](http://img.shields.io/hexpm/v/rogger.svg)](https://hex.pm/packages/rogger)
+
 Simple Elixir logger which publishes messages in RabbitMQ
 
 ## Usage
