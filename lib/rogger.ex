@@ -19,19 +19,19 @@ defmodule Rogger do
     GenServer.start_link(Rogger, chan, name: :rogger)
   end
 
-  def info(message) do
+  def info(message, routing_key \\ "") do
     date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
-    GenServer.cast(:rogger, {:info, ~s({"date": "#{date}", "message": "#{message}"})})
+    GenServer.cast(:rogger, {:info, routing_key, ~s({"date": "#{date}", "message": "#{message}"})})
   end
 
-  def warn(message) do
+  def warn(message, routing_key \\ "") do
     date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
-    GenServer.cast(:rogger, {:warn, ~s({"date": "#{date}", "message": "#{message}"})})
+    GenServer.cast(:rogger, {:warn, routing_key, ~s({"date": "#{date}", "message": "#{message}"})})
   end
 
-  def error(message) do
+  def error(message, routing_key \\ "") do
     date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
-    GenServer.cast(:rogger, {:error, ~s({"date": "#{date}", "message": "#{message}"})})
+    GenServer.cast(:rogger, {:error, routing_key, ~s({"date": "#{date}", "message": "#{message}"})})
   end
 
   ### Server API
@@ -71,23 +71,23 @@ defmodule Rogger do
     {:ok}
   end
 
-  def publish(chan, exchange, message) do
-    AMQP.Basic.publish chan, exchange, "", message
+  def publish(chan, exchange, routing_key, message) do
+    AMQP.Basic.publish chan, exchange, routing_key, message
     {:ok}
   end
 
-  def handle_cast({:info, message}, channel) do
-    publish channel, @info_exchange, message
+  def handle_cast({:info, routing_key, message}, channel) do
+    publish channel, @info_exchange, routing_key, message
     {:noreply, channel}
   end
 
-  def handle_cast({:warn, message}, channel) do
-    publish channel, @warn_exchange, message
+  def handle_cast({:warn, routing_key, message}, channel) do
+    publish channel, @warn_exchange, routing_key, message
     {:noreply, channel}
   end
 
-  def handle_cast({:error, message}, channel) do
-    publish channel, @error_exchange, message
+  def handle_cast({:error, routing_key, message}, channel) do
+    publish channel, @error_exchange, routing_key, message
     {:noreply, channel}
   end
 end

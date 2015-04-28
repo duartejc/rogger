@@ -41,7 +41,7 @@ defmodule RoggerTest do
   test "it publishes a message to a queue using a channel" do
     {:ok, conn} = AMQP.Connection.open
     {:ok, chan} = AMQP.Channel.open(conn)
-    status = Rogger.publish(chan, "test_exchange", "Hello, World!")
+    status = Rogger.publish(chan, "test_exchange", "test_routing_key", "Hello, World!")
     assert {:ok} = status
   end
 
