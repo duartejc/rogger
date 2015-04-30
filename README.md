@@ -1,7 +1,6 @@
 Rogger
 ======
 
-[![Build Status](https://travis-ci.org/duartejc/rogger.png?branch=master)](https://travis-ci.org/duartejc/rogger)
 [![Hex Version](http://img.shields.io/hexpm/v/rogger.svg)](https://hex.pm/packages/rogger)
 
 Simple Elixir logger which publishes messages in RabbitMQ
