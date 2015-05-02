@@ -13,7 +13,8 @@ use Mix.Config
 config :rogger,
   host: "localhost",
   username: "guest",
-  password: "guest"
+  password: "guest",
+  app: "teste"
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

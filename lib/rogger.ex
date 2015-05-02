@@ -21,18 +21,15 @@ defmodule Rogger do
   end
 
   def info(message, routing_key \\ "") do
-    #date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
-    GenServer.cast(:rogger, {:info, routing_key, ~s({"#{message}"})})
+    GenServer.cast(:rogger, {:info, routing_key, ~s("#{message}")})
   end
 
   def warn(message, routing_key \\ "") do
-    #date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
-    GenServer.cast(:rogger, {:warn, routing_key, ~s({"#{message}"})})
+    GenServer.cast(:rogger, {:warn, routing_key, ~s("#{message}")})
   end
 
   def error(message, routing_key \\ "") do
-    #date = Date.local |> DateFormat.format!("%a, %d %m %Y %T %Z", :strftime)
-    GenServer.cast(:rogger, {:error, routing_key, ~s({"#{message}"})})
+    GenServer.cast(:rogger, {:error, routing_key, ~s("#{message}")})
   end
 
   ### Server API
@@ -73,22 +70,25 @@ defmodule Rogger do
   end
 
   def publish(chan, exchange, routing_key, message, opts) do
-    AMQP.Basic.publish chan, exchange, routing_key, message
+    AMQP.Basic.publish chan, exchange, routing_key, message, opts
     {:ok}
   end
 
   def handle_cast({:info, routing_key, message}, channel) do
-    publish channel, @info_exchange, routing_key, message, [app_id: @app, timestamp: :os.timestamp]
+    timestamp = Date.local |> Date.convert(:secs)
+    publish channel, @info_exchange, routing_key, message, [app_id: @app, timestamp: timestamp]
     {:noreply, channel}
   end
 
   def handle_cast({:warn, routing_key, message}, channel) do
-    publish channel, @warn_exchange, routing_key, message, [app_id: @app, timestamp: :os.timestamp]
+    timestamp = Date.local |> Date.convert(:secs)
+    publish channel, @warn_exchange, routing_key, message, [app_id: @app, timestamp: timestamp]
     {:noreply, channel}
   end
 
   def handle_cast({:error, routing_key, message}, channel) do
-    publish channel, @error_exchange, routing_key, message, [app_id: @app, timestamp: :os.timestamp]
+    timestamp = Date.local |> Date.convert(:secs)
+    publish channel, @error_exchange, routing_key, message, [app_id: @app, timestamp: timestamp]
     {:noreply, channel}
   end
 end
