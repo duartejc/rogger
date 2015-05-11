@@ -3,7 +3,7 @@ defmodule Rogger.Mixfile do
 
   def project do
     [app: :rogger,
-     version: "0.0.5",
+     version: "0.1.0",
      elixir: "~> 1.0",
      description: description,
      package: package,
